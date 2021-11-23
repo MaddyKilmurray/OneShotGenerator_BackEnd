@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="DnD_CharacterService" />
+        <module name="Dnd_RandomiserService" />
+        <module name="DnD_UserService" />
+        <module name="DnD_ScenarioService" />
+        <module name="DnD_DiscoveryService" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="DnD_CharacterService" target="1.8" />
+      <module name="DnD_DiscoveryService" target="1.8" />
+      <module name="Dnd_RandomiserService" target="1.8" />
+      <module name="DnD_ScenarioService" target="1.8" />
+      <module name="DnD_UserService" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="DnD_CharacterService" options="-parameters" />
+      <module name="DnD_DiscoveryService" options="-parameters" />
+      <module name="DnD_ScenarioService" options="-parameters" />
+      <module name="DnD_UserService" options="-parameters" />
+      <module name="Dnd_RandomiserService" options="-parameters" />
+    </option>
+  </component>
+</project>

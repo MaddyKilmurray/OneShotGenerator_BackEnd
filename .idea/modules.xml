@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/BackEnd.iml" filepath="$PROJECT_DIR$/.idea/BackEnd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DnD_CharacterService/DnD_CharacterService.iml" filepath="$PROJECT_DIR$/DnD_CharacterService/DnD_CharacterService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DnD_DiscoveryService/DnD_DiscoveryService.iml" filepath="$PROJECT_DIR$/DnD_DiscoveryService/DnD_DiscoveryService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DnD_ScenarioService/DnD_ScenarioService.iml" filepath="$PROJECT_DIR$/DnD_ScenarioService/DnD_ScenarioService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DnD_UserService/DnD_UserService.iml" filepath="$PROJECT_DIR$/DnD_UserService/DnD_UserService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Dnd_RandomiserService/Dnd_RandomiserService.iml" filepath="$PROJECT_DIR$/Dnd_RandomiserService/Dnd_RandomiserService.iml" />
+    </modules>
+  </component>
+</project>
