@@ -1,0 +1,54 @@
+package com.kilmurray.dnd_characterservice.controller;
+
+import com.kilmurray.dnd_characterservice.dto.CharacterDto;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import javax.swing.text.html.Option;
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/character")
+public class CharacterController {
+
+    final CharacterService characterService;
+
+    public CharacterController(CharacterService characterService) {
+        this.characterService = characterService;
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<CharacterDto> getAll() {
+        return characterService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public CharacterDto getById(@PathVariable(name = "id") Long characterId) {
+        return characterService.getByCharId(characterId);
+    }
+
+    @GetMapping("/byPlayer/{playerId}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<CharacterDto> getByPlayerId(@PathVariable(name = "playerId") Long playerId) {
+        return characterService.getByPlayerId(playerId);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public CharacterDto createCharacter(@RequestBody CharacterDto characterDto) {
+        return characterService.createCharacter(characterDto);
+    }
+
+    @PatchMapping("/update/{charId}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public CharacterDto updateCharacter(@PathVariable(name = "charId") Long charId, @RequestParam Optional<String> characterName,
+                                        @RequestParam Optional<Integer> level, @RequestParam Optional<Integer> experience,
+                                        @RequestParam Optional<String> alignment, @RequestParam Optional<String> startingWeapon,
+                                        @RequestParam Optional<String> startingArmour,
+                                        @RequestParam Optional<String> startingGear, @RequestParam Optional<String> startingTrinket) {
+        return characterService.updateCharacter(charId,characterName,level,experience,alignment,startingWeapon, startingArmour, startingGear, startingTrinket);
+    }
+}

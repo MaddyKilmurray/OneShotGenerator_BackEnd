@@ -75,7 +75,7 @@ public class UserService {
     }
 
     public boolean validateEmailExists(String email) {
-        Optional<UserDao> checkUser = userRepository.findByEmailAddress(email);
+        Optional<UserDao> checkUser = userRepository.findByEmail(email);
         return checkUser.isPresent();
     }
 
