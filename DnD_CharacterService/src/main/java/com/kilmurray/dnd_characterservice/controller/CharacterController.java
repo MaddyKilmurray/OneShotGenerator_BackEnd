@@ -38,8 +38,8 @@ public class CharacterController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CharacterDto createCharacter(@RequestBody CharacterDto characterDto) {
-        return characterService.createCharacter(characterDto);
+    public void createCharacter(@RequestBody CharacterDto characterDto) {
+        characterService.createCharacter(characterDto);
     }
 
     @PatchMapping("/update/{charId}")

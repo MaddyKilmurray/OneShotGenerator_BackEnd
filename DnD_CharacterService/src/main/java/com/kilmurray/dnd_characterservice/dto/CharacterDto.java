@@ -12,7 +12,7 @@ import lombok.Setter;
 public class CharacterDto {
 
     private Long id;
-    private Long userId;
+    private Long playerId;
     private String characterName;
     private int level;
     private int experience;

@@ -21,7 +21,7 @@ public class CharacterDao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long userId;
+    private Long playerId;
     private String characterName;
     private int level;
     private int experience;
