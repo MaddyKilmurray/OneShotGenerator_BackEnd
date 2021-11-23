@@ -42,9 +42,6 @@ public class CharacterService {
 
     public List<CharacterDto> getByPlayerId(Long playerId) {
         List<CharacterDao> foundChars = characterRepository.findCharacterDaoByPlayerId(playerId);
-        if (foundChars.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No Characters with that Player ID exist");
-        }
         List<CharacterDto> allCharsDto = new ArrayList<>();
         for (CharacterDao charDao : foundChars) {
             allCharsDto.add(convertToDto(charDao));
