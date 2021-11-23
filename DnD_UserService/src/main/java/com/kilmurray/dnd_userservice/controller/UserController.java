@@ -46,12 +46,14 @@ public class UserController {
     }
 
     @PostMapping("/validate/username")
+    @ResponseStatus(HttpStatus.OK)
     public boolean isValidUsername(@RequestBody UsernameDto usernameDto) {
         return userService.validateUsernameExists(usernameDto.getEmail());
     }
 
-    @PostMapping("/validate/password")
-    public boolean isValidPassword(@RequestBody EmailDto emailDto) {
+    @PostMapping("/validate/email")
+    @ResponseStatus(HttpStatus.OK)
+    public boolean isValidEmail(@RequestBody EmailDto emailDto) {
         return userService.validateEmailExists(emailDto.getEmail());
     }
 
