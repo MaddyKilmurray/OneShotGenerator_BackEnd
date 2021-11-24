@@ -1,6 +1,10 @@
 package com.kilmurray.dnd_randomiserservice.data;
 
-import java.util.List;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.Random;
 
 public class dataSet {
 
@@ -57,8 +61,45 @@ public class dataSet {
             "A bit of folded cloth that, when unfolded, turns into a stylish cap","A receipt of deposit at a bank in a far-flung city","A diary with seven missing pages","An empty silver snuffbox bearing an inscription on the surface that says \"dreams\"",
             "An iron holy symbol devoted to an unknown god","A book that tells the story of a legendary hero's rise and fall, with the last chapter missing","A vial of dragon blood","An ancient arrow of elven design","A needle that never bends",
             "An ornate brooch of dwarven design","An empty wine bottle bearing a pretty label that says, \"The Wizard of Wines Winery, Red Dragon Crush, 331422-W\"","A mosaic tile with a multicolored, glazed surface","A petrified mouse","A black pirate flag adorned with a dragon's skull and crossbones",
-            "A tiny mechanical crab or spider that moves about when it’s not being observed","\tA glass jar containing lard with a label that reads, \"Griffon Grease\"","A wooden box with a ceramic bottom that holds a living worm with a head on each end of its body","A metal urn containing the ashes of a hero"
+            "A tiny mechanical crab or spider that moves about when it’s not being observed","A glass jar containing lard with a label that reads, \"Griffon Grease\"","A wooden box with a ceramic bottom that holds a living worm with a head on each end of its body","A metal urn containing the ashes of a hero"
     };
 
+    public String getRandomStarterWeapon() {
+        Random generator = new Random();
+        int randomIndex = generator.nextInt(this.starterWeapons.length);
+        return this.starterWeapons[randomIndex][0];
+    }
 
+    public String getRandomStarterArmour() {
+        Random generator = new Random();
+        int randomIndex = generator.nextInt(this.starterArmour.length);
+        return this.starterArmour[randomIndex][0];
+    }
+
+    public String getRandomStarterGear() {
+        Random generator = new Random();
+        int randomIndex = generator.nextInt(this.starterGear.length);
+        return this.starterGear[randomIndex];
+    }
+
+    public String getSpecificStarterGear(String gear) {
+        if (gear.equals(null)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Gear cannot be null");
+        }
+        if (gear.length() < 6) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Please enter a valid gear term");
+        }
+        for (String item : this.starterGear) {
+            if (item.contains(StringUtils.capitalize(gear))) {
+                return item;
+            }
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Requested gear could not be found");
+    }
+
+    public String getRandomTrinket() {
+        Random generator = new Random();
+        int randomIndex = generator.nextInt(this.starterTrinkets.length);
+        return this.starterTrinkets[randomIndex];
+    }
 }
