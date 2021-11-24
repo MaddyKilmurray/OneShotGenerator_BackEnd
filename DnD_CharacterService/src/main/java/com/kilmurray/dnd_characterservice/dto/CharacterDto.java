@@ -16,9 +16,16 @@ public class CharacterDto {
     private String characterName;
     private int level;
     private int experience;
+    private String alignment;
+    private String startingWeapon;
+    private String startingArmour;
+    private String startingGear;
+    private String startingTrinket;
+
+    // Cannot be updated
     private int numberOfHitDice;
 
-    // Race Bonuses
+    // Race Bonuses - Cannot be updated
     private String race;
     private int speed;
     private String abilityScore;
@@ -29,7 +36,7 @@ public class CharacterDto {
     private String languages;
     private String traits;
 
-    // Class Bonuses
+    // Class Bonuses - Cannot be updated
     private String charClass;
     private int hitDice;
     private int hitPoints;
@@ -37,8 +44,7 @@ public class CharacterDto {
     private String classProficiencies;
     private String savingThrows;
 
-
-    // Player stats
+    // Player stats - Cannot be updated
     private int strength;
     private int dexterity;
     private int constitution;
@@ -46,12 +52,6 @@ public class CharacterDto {
     private int wisdom;
     private int charisma;
     private int armourClass;
-
-    private String alignment;
-    private String startingWeapon;
-    private String startingArmour;
-    private String startingGear;
-    private String startingTrinket;
 
 //    Optional:
 //    private String ideals;
