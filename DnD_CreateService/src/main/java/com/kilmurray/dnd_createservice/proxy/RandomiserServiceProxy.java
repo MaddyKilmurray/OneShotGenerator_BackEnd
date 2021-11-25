@@ -1,50 +1,48 @@
-package com.example.dnd_createservice.proxy;
+package com.kilmurray.dnd_createservice.proxy;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @FeignClient("randomiser-service")
-@RequestMapping("/api/random")
 public interface RandomiserServiceProxy {
 
-    @GetMapping("/d4")
+    @GetMapping("/api/random/d4")
     public int randomD4();
 
-    @GetMapping("/d6")
+    @GetMapping("/api/random/d6")
     public int randomD6();
 
-    @GetMapping("/d8")
+    @GetMapping("/api/random/d8")
     public int randomD8();
 
-    @GetMapping("/d12")
+    @GetMapping("/api/random/d12")
     public int randomD12();
 
-    @GetMapping("/d20")
+    @GetMapping("/api/random/d20")
     public int randomD20();
 
-    @GetMapping("/d100")
+    @GetMapping("/api/random/d100")
     public int randomD100();
 
-    @GetMapping("/weapon")
+    @GetMapping("/api/random/weapon")
     public String getRandomStarterWeapon();
 
-    @GetMapping("/armour")
+    @GetMapping("/api/random/armour")
     public String getRandomStarterArmour();
 
-    @GetMapping("/gear")
+    @GetMapping("/api/random/gear")
     public String getRandomStarterGear();
 
-    @GetMapping("/gear/{gear}")
+    @GetMapping("/api/random/gear/{gear}")
     public String getStarterGear(@PathVariable(name = "gear") String gear);
 
-    @GetMapping("/trinket")
+    @GetMapping("/api/random/trinket")
     public String getRandomStarterTrinket();
 
-    @GetMapping("/newStat")
+    @GetMapping("/api/random/newStat")
     public int getStat();
 
-    @GetMapping("/statModifier/{stat}")
+    @GetMapping("/api/random/statModifier/{stat}")
     public int getStatModifier(@PathVariable(name = "stat") int stat);
 }

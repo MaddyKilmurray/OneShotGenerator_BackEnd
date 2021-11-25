@@ -1,10 +1,10 @@
-package com.example.dnd_createservice.service;
+package com.kilmurray.dnd_createservice.service;
 
-import com.example.dnd_createservice.dto.CharacterIncomingDto;
-import com.example.dnd_createservice.dto.CharacterOutgoingDto;
-import com.example.dnd_createservice.proxy.CharacterServiceProxy;
-import com.example.dnd_createservice.proxy.RandomiserServiceProxy;
-import com.example.dnd_createservice.proxy.UserServiceProxy;
+import com.kilmurray.dnd_createservice.dto.CharacterIncomingDto;
+import com.kilmurray.dnd_createservice.dto.CharacterOutgoingDto;
+import com.kilmurray.dnd_createservice.proxy.CharacterServiceProxy;
+import com.kilmurray.dnd_createservice.proxy.RandomiserServiceProxy;
+import com.kilmurray.dnd_createservice.proxy.UserServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +22,7 @@ public class CreateService {
 
     public CharacterOutgoingDto createRandomCharacter(CharacterIncomingDto characterIncomingDto) {
         CharacterOutgoingDto newCharacter = generateOutgoing(characterIncomingDto);
-
+        return newCharacter;
     }
 
     public CharacterOutgoingDto generateOutgoing(CharacterIncomingDto characterIncomingDto) {
@@ -32,6 +32,7 @@ public class CreateService {
                 characterIncomingDto.getProficiency(), characterIncomingDto.getLanguages(), characterIncomingDto.getTraits(), characterIncomingDto.getCharClass(),
                 characterIncomingDto.getHitDice(), characterIncomingDto.getHitPoints(), characterIncomingDto.getClassSkills(),characterIncomingDto.getClassProficiencies(),
                 characterIncomingDto.getSavingThrows());
+        return newCharacter;
     }
 
 

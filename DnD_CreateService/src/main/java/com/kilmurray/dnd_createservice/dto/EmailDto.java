@@ -1,4 +1,4 @@
-package com.example.dnd_createservice.dto;
+package com.kilmurray.dnd_createservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UsernameDto {
+public class EmailDto {
     public String email;
 }

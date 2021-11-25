@@ -20,6 +20,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -46,10 +48,10 @@ public class UserControllerTest {
     public void setUp() {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
-        testDMUser1 = new UserDao(1L,"testDM1","password","dm@one.com",true,1L);
-        testDMUser2 = new UserDao(2L,"testDM2","password","dm@two.com",true,2L);
-        testPlayerUser1 = new UserDao(3L,"testPlayer1","password","player@one.com",true,1L);
-        testPlayerUser2 = new UserDao(4L,"testPlayer2","password","player@two.com",true,1L);
+        testDMUser1 = new UserDao("testDM1","password","dm@one.com",true,1L,new ArrayList<>());
+        testDMUser2 = new UserDao("testDM2","password","dm@two.com",true,2L,new ArrayList<>());
+        testPlayerUser1 = new UserDao("testPlayer1","password","player@one.com",true,1L,new ArrayList<>());
+        testPlayerUser2 = new UserDao("testPlayer2","password","player@two.com",true,1L,new ArrayList<>());
 
         userRepository.save(testDMUser1);
         userRepository.save(testDMUser2);
@@ -103,7 +105,7 @@ public class UserControllerTest {
     @Test
     @DisplayName("Test: POST a new user. Creates user as expected")
     public void UserController_PostUser_Success() throws Exception {
-        testUser = new UserDao(5l, "newTestUser","password","test@user.com",false,2L);
+        testUser = new UserDao( "newTestUser","password","test@user.com",false,2L,new ArrayList<>());
 
         String body = objectMapper.writeValueAsString(testUser);
 

@@ -1,4 +1,4 @@
-package com.example.dnd_createservice;
+package com.kilmurray.dnd_createservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
