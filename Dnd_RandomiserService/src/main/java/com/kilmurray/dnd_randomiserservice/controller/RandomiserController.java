@@ -78,6 +78,11 @@ public class RandomiserController {
         return randomiserService.statGenerator();
     }
 
+    @GetMapping("/alignment")
+    public String getRandomAlignment() {
+        return randomiserService.getRandomAlignment();
+    }
+
     @GetMapping("/statModifier/{stat}")
     public int getStatModifier(@PathVariable(name = "stat") int stat) {
         return randomiserService.getStatModifier(stat);

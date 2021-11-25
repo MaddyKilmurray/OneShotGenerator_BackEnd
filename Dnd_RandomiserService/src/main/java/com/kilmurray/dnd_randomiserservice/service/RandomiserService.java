@@ -63,6 +63,13 @@ public class RandomiserService {
         return dataSet.getStarterTrinkets()[randomIndex];
     }
 
+    public String getRandomAlignment() {
+        dataSet = new DataSet();
+        Random generator = new Random();
+        int randomIndex = generator.nextInt(dataSet.getAlignment().length);
+        return dataSet.getAlignment()[randomIndex];
+    }
+
     public int statGenerator() {
         return (int) Math.floor(Math.random()*(18-3+1)+3);
     }
