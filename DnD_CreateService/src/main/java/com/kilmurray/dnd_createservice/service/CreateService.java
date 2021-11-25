@@ -27,13 +27,29 @@ public class CreateService {
 
     public CharacterOutgoingDto generateOutgoing(CharacterIncomingDto characterIncomingDto) {
         CharacterOutgoingDto newCharacter = new CharacterOutgoingDto(characterIncomingDto.getId(),characterIncomingDto.getPlayerId(),
-                characterIncomingDto.getCharacterName(), characterIncomingDto.getAlignment(), characterIncomingDto.getRace(), characterIncomingDto.getSpeed(),
+                characterIncomingDto.getCharacterName(), characterIncomingDto.getRace(), characterIncomingDto.getSpeed(),
                 characterIncomingDto.getAbilityScore(), characterIncomingDto.getAbilityBonus(), characterIncomingDto.getSize(), characterIncomingDto.getWeaponProficiencies(),
                 characterIncomingDto.getProficiency(), characterIncomingDto.getLanguages(), characterIncomingDto.getTraits(), characterIncomingDto.getCharClass(),
-                characterIncomingDto.getHitDice(), characterIncomingDto.getHitPoints(), characterIncomingDto.getClassSkills(),characterIncomingDto.getClassProficiencies(),
+                characterIncomingDto.getHitDice(), characterIncomingDto.getClassSkills(),characterIncomingDto.getClassProficiencies(),
                 characterIncomingDto.getSavingThrows());
+        newCharacter.setAlignment(randomiserServiceProxy.getRandomAlignment());
+        newCharacter.setStrength(randomiserServiceProxy.getStat()); newCharacter.setStrengthModifier(randomiserServiceProxy.getStatModifier(newCharacter.getStrength()));
+        newCharacter.setDexterity(randomiserServiceProxy.getStat()); newCharacter.setDexterityModifier(randomiserServiceProxy.getStatModifier(newCharacter.getDexterity()));
+        newCharacter.setConstitution(randomiserServiceProxy.getStat()); newCharacter.setConstitutionModifier(randomiserServiceProxy.getStatModifier(newCharacter.getConstitution()));
+        newCharacter.setIntelligence(randomiserServiceProxy.getStat()); newCharacter.setIntelligence(randomiserServiceProxy.getStatModifier(newCharacter.getIntelligence()));
+        newCharacter.setWisdom(randomiserServiceProxy.getStat()); newCharacter.setWisdomModifier(randomiserServiceProxy.getStatModifier(newCharacter.getWisdom()));
+        newCharacter.setCharisma(randomiserServiceProxy.getStat()); newCharacter.setCharismaModifier(randomiserServiceProxy.getStatModifier(newCharacter.getCharisma()));
+        newCharacter.setArmourClass(10 + newCharacter.getDexterityModifier());
+        newCharacter.setStartingWeapon(randomiserServiceProxy.getRandomStarterWeapon());
+        newCharacter.setStartingArmour(randomiserServiceProxy.getRandomStarterArmour());
+        newCharacter.setStartingGear(randomiserServiceProxy.getRandomStarterGear());
+        newCharacter.setStartingTrinket(randomiserServiceProxy.getRandomStarterTrinket());
+        newCharacter.setHitPoints(newCharacter.getHitDice() + newCharacter.getConstitution());
         return newCharacter;
     }
 
+    public void saveCharacter(CharacterOutgoingDto characterOutgoingDto) {
+        characterServiceProxy.createCharacter(characterOutgoingDto);
+    }
 
 }

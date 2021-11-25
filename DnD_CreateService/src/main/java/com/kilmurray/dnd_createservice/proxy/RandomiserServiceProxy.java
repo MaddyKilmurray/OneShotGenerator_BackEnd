@@ -43,6 +43,11 @@ public interface RandomiserServiceProxy {
     @GetMapping("/api/random/newStat")
     public int getStat();
 
+    @GetMapping("/api/random/alignment")
+    public String getRandomAlignment();
+
     @GetMapping("/api/random/statModifier/{stat}")
     public int getStatModifier(@PathVariable(name = "stat") int stat);
+
+
 }
