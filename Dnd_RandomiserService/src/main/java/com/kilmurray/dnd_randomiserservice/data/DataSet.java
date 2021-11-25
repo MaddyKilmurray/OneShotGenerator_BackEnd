@@ -1,12 +1,15 @@
 package com.kilmurray.dnd_randomiserservice.data;
 
-import org.apache.commons.lang.StringUtils;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.Random;
-
-public class dataSet {
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class DataSet {
 
     private String[][] starterWeapons = {
             {"Club","Simple Melee"},{"Dagger","Simple Melee"},{"Greatclub","Simple Melee"},
@@ -64,42 +67,5 @@ public class dataSet {
             "A tiny mechanical crab or spider that moves about when it’s not being observed","A glass jar containing lard with a label that reads, \"Griffon Grease\"","A wooden box with a ceramic bottom that holds a living worm with a head on each end of its body","A metal urn containing the ashes of a hero"
     };
 
-    public String getRandomStarterWeapon() {
-        Random generator = new Random();
-        int randomIndex = generator.nextInt(this.starterWeapons.length);
-        return this.starterWeapons[randomIndex][0];
-    }
 
-    public String getRandomStarterArmour() {
-        Random generator = new Random();
-        int randomIndex = generator.nextInt(this.starterArmour.length);
-        return this.starterArmour[randomIndex][0];
-    }
-
-    public String getRandomStarterGear() {
-        Random generator = new Random();
-        int randomIndex = generator.nextInt(this.starterGear.length);
-        return this.starterGear[randomIndex];
-    }
-
-    public String getSpecificStarterGear(String gear) {
-        if (gear.equals(null)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Gear cannot be null");
-        }
-        if (gear.length() < 6) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Please enter a valid gear term");
-        }
-        for (String item : this.starterGear) {
-            if (item.contains(StringUtils.capitalize(gear))) {
-                return item;
-            }
-        }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Requested gear could not be found");
-    }
-
-    public String getRandomTrinket() {
-        Random generator = new Random();
-        int randomIndex = generator.nextInt(this.starterTrinkets.length);
-        return this.starterTrinkets[randomIndex];
-    }
 }
