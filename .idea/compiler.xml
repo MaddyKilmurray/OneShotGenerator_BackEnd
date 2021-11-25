@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="DnD_CharacterService" />
+        <module name="DnD_CreateService" />
         <module name="Dnd_RandomiserService" />
         <module name="DnD_UserService" />
         <module name="DnD_ScenarioService" />
@@ -16,6 +17,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="DnD_CharacterService" target="1.8" />
+      <module name="DnD_CreateService" target="11" />
       <module name="DnD_DiscoveryService" target="1.8" />
       <module name="Dnd_RandomiserService" target="1.8" />
       <module name="DnD_ScenarioService" target="1.8" />
@@ -25,6 +27,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="DnD_CharacterService" options="-parameters" />
+      <module name="DnD_CreateService" options="-parameters" />
       <module name="DnD_DiscoveryService" options="-parameters" />
       <module name="DnD_ScenarioService" options="-parameters" />
       <module name="DnD_UserService" options="-parameters" />

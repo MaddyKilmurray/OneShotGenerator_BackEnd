@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/Dnd_RandomiserService/pom.xml" />
         <option value="$PROJECT_DIR$/DnD_ScenarioService/pom.xml" />
         <option value="$PROJECT_DIR$/DnD_UserService/pom.xml" />
+        <option value="$PROJECT_DIR$/DnD_CreateService/pom.xml" />
       </list>
     </option>
   </component>
