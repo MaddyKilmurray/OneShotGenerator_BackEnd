@@ -30,6 +30,10 @@ public class UserDao {
     private Long partyId;
 //    private List<LocalDate> availability;
 
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Roles> roles = new HashSet<>();
+
     public UserDao(String username, String password, String email, Boolean isDm, Long partyId, List<LocalDate> availability) {
         this.username = username;
         this.password = password;

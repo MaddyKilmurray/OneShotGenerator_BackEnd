@@ -3,14 +3,20 @@ package com.kilmurray.dnd_userservice.controller;
 import com.kilmurray.dnd_userservice.dto.EmailDto;
 import com.kilmurray.dnd_userservice.dto.UserDto;
 import com.kilmurray.dnd_userservice.dto.UsernameDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(value = "*")
 @RestController
 @RequestMapping("/api/users")
+@Slf4j
 public class UserController {
 
     final
@@ -32,17 +38,23 @@ public class UserController {
         return userService.getUserById(id);
     }
 
+    @GetMapping("/authenticated")
+    @ResponseStatus(HttpStatus.OK)
+    public UserDto getUserById(Authentication authentication) {
+        return userService.getUserByUsername(authentication.getName());
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto createUser(@RequestBody UserDto userDto) {
         return userService.create(userDto);
     }
 
-    @PatchMapping("/update/{id}")
+    @PatchMapping("/authenticated/update")
     @ResponseStatus(HttpStatus.OK)
-    public UserDto updateUser(@PathVariable(name = "id") Long userId, @RequestParam Optional<String> password, @RequestParam Optional<String> email,
+    public UserDto updateUser(Authentication authentication, @RequestParam Optional<String> password, @RequestParam Optional<String> email,
                               @RequestParam Optional<Boolean> isDm, @RequestParam Optional<Long> partyId) {
-        return userService.updateUser(userId,password,isDm,partyId);
+        return userService.updateUser(authentication.getName(),password,isDm,partyId);
     }
 
     @PostMapping("/validate/username")
