@@ -58,7 +58,6 @@ public class CharacterOutgoingDto {
     private int intelligenceModifier;
     private int wisdomModifier;
     private int charismaModifier;
-    private int armourClassModifier;
 
 //    Optional:
 //    private String ideals;
@@ -66,13 +65,14 @@ public class CharacterOutgoingDto {
 //    private String flaws;
 //    private String background;
 
-    public CharacterOutgoingDto(Long id, Long playerId, String characterName, String alignment, String race, int speed, String abilityScore, int abilityBonus,
-                                String size, String weaponProficiencies, String proficiency, String languages, String traits, String charClass, int hitDice,
-                                int hitPoints, String classSkills, String classProficiencies, String savingThrows) {
+    public CharacterOutgoingDto(Long id, Long playerId, String characterName, String race, int speed,
+                                String abilityScore, int abilityBonus,
+                                String size, String weaponProficiencies, String proficiency,
+                                String languages, String traits, String charClass, int hitDice,
+                                String classSkills, String classProficiencies, String savingThrows) {
         this.id = id;
         this.playerId = playerId;
         this.characterName = characterName;
-        this.alignment = alignment;
         this.race = race;
         this.speed = speed;
         this.abilityScore = abilityScore;
@@ -84,7 +84,6 @@ public class CharacterOutgoingDto {
         this.traits = traits;
         this.charClass = charClass;
         this.hitDice = hitDice;
-        this.hitPoints = hitPoints;
         this.classSkills = classSkills;
         this.classProficiencies = classProficiencies;
         this.savingThrows = savingThrows;

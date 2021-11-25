@@ -14,7 +14,6 @@ public class CharacterIncomingDto {
     private Long id;
     private Long playerId;
     private String characterName;
-    private String alignment;
 
     // Race Bonuses - Cannot be updated
     private String race;
@@ -30,7 +29,6 @@ public class CharacterIncomingDto {
     // Class Bonuses - Cannot be updated
     private String charClass;
     private int hitDice;
-    private int hitPoints;
     private String classSkills;
     private String classProficiencies;
     private String savingThrows;
