@@ -1,5 +1,6 @@
 package com.kilmurray.dnd_userservice.controller;
 
+import com.kilmurray.dnd_userservice.dao.Roles;
 import com.kilmurray.dnd_userservice.dao.UserDao;
 import com.kilmurray.dnd_userservice.dto.UserDto;
 import com.kilmurray.dnd_userservice.repository.UserRepository;
@@ -7,9 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -44,8 +43,8 @@ public class UserService {
         return createdUser.map(this::convertToDto).orElse(null);
     }
 
-    public UserDto updateUser(Long userId, Optional<String> password, Optional<Boolean> isDm, Optional<Long> partyId) {
-        Optional<UserDao> updateUser = userRepository.findById(userId);
+    public UserDto updateUser(String username, Optional<String> password, Optional<Boolean> isDm, Optional<Long> partyId) {
+        Optional<UserDao> updateUser = userRepository.findByEmail(username);
         UserDao updatedUser = updateUser
                 .map(users -> updateUserDetails(password, isDm, partyId, users)) // update the user
                 .orElseThrow(() -> new RuntimeException("User not found."));
@@ -85,9 +84,23 @@ public class UserService {
     }
 
     public UserDao convertToDao(UserDto userDto) {
-        return new UserDao(userDto.getId(), userDto.getUsername(),
-                userDto.getPassword(), userDto.getEmail(), userDto.getIsDm(),
-                userDto.getPartyId());
+        if (userDto.getIsDm()) {
+            return new UserDao(userDto.getId(), userDto.getUsername(),
+                    userDto.getPassword(), userDto.getEmail(), userDto.getIsDm(),
+                    userDto.getPartyId(), new HashSet<Roles>(Arrays.asList(new Roles("DM"))));
+        }
+        else {
+            return new UserDao(userDto.getId(), userDto.getUsername(),
+                    userDto.getPassword(), userDto.getEmail(), userDto.getIsDm(),
+                    userDto.getPartyId(), new HashSet<Roles>(Arrays.asList(new Roles("PLAYER"))));
+        }
     }
 
+    public UserDto getUserByUsername(String name) {
+        Optional<UserDao> foundUser = userRepository.findByUsername(name);
+        if (!foundUser.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"User cannot be found.");
+        }
+        return convertToDto(foundUser.get());
+    }
 }
