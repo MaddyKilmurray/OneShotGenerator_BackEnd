@@ -51,12 +51,12 @@ public class CharacterControllerTest {
                 "sword","shield","gloves","necklace",1,"dwarf",25,"con",2,"medium",
                 "proficiency","weapon proficiencies", "languages", "traits",
                 "paladin",12,50,"class skills","class proficiencies","saving throws",
-                15,15,15,15,15,15,15);
+                15,15,15,15,15,15,15,15,15,15,15,15,15,15);
         testCharacter2 = new CharacterDao(2L,1L,"another test character",1,0,"neutral good",
                 "bow","shield","gloves","necklace",1,"dwarf",25,"con",2,"medium",
                 "proficiency","weapon proficiencies", "languages", "traits",
                 "paladin",12,50,"class skills","class proficiencies","saving throws",
-                15,15,15,15,15,15,15);
+                15,15,15,15,15,15,15,15,15,15,15,15,15,15);
 
         characterRepository.save(testCharacter1);
         characterRepository.save(testCharacter2);
@@ -129,7 +129,7 @@ public class CharacterControllerTest {
                 "hammer","shield","gloves","necklace",1,"dwarf",25,"con",2,"medium",
                 "proficiency","weapon proficiencies", "languages", "traits",
                 "paladin",12,50,"class skills","class proficiencies","saving throws",
-                15,15,15,15,15,15,15);
+                15,15,15,15,15,15,15,15,15,15,15,15,15,15);
 
         String body = objectMapper.writeValueAsString(newTestChar);
 

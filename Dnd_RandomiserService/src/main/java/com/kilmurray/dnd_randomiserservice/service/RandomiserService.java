@@ -15,30 +15,33 @@ public class RandomiserService {
     private DataSet dataSet;
 
     public int randomiserInt(int diceNumber) {
-        Random rand = new Random();
-        int dice_roll = rand.nextInt(diceNumber + 1);
+        int dice_roll = (int) Math.floor(Math.random()*(diceNumber-1+1)+1);
         return dice_roll;
     }
 
     public String getRandomStarterWeapon() {
+        dataSet = new DataSet();
         Random generator = new Random();
         int randomIndex = generator.nextInt(dataSet.getStarterWeapons().length);
-        return dataSet.getStarterWeapons()[randomIndex][0];
+        return dataSet.getStarterWeapons()[randomIndex][0] + ", " + dataSet.getStarterWeapons()[randomIndex][1];
     }
 
     public String getRandomStarterArmour() {
+        dataSet = new DataSet();
         Random generator = new Random();
         int randomIndex = generator.nextInt(dataSet.getStarterArmour().length);
-        return dataSet.getStarterArmour()[randomIndex][0];
+        return dataSet.getStarterArmour()[randomIndex][0]  + ", " + dataSet.getStarterArmour()[randomIndex][1];
     }
 
     public String getRandomStarterGear() {
+        dataSet = new DataSet();
         Random generator = new Random();
         int randomIndex = generator.nextInt(dataSet.getStarterGear().length);
         return dataSet.getStarterGear()[randomIndex];
     }
 
     public String getSpecificStarterGear(String gear) {
+        dataSet = new DataSet();
         if (gear.equals(null)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Gear cannot be null");
         }
@@ -54,6 +57,7 @@ public class RandomiserService {
     }
 
     public String getRandomTrinket() {
+        dataSet = new DataSet();
         Random generator = new Random();
         int randomIndex = generator.nextInt(dataSet.getStarterTrinkets().length);
         return dataSet.getStarterTrinkets()[randomIndex];
