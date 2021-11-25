@@ -16,13 +16,13 @@ public class CreateController {
 
     @PostMapping("/view")
     @ResponseStatus(HttpStatus.OK)
-    public CharacterOutgoingDto generateCompleteCharacter(CharacterIncomingDto characterIncomingDto) {
+    public CharacterOutgoingDto generateCompleteCharacter(@RequestBody CharacterIncomingDto characterIncomingDto) {
         return createService.generateOutgoing(characterIncomingDto);
     }
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveCompleteCharacter(CharacterOutgoingDto characterOutgoingDto) {
+    public void saveCompleteCharacter(@RequestBody CharacterOutgoingDto characterOutgoingDto) {
         createService.saveCharacter(characterOutgoingDto);
     }
 

@@ -65,8 +65,10 @@ public class CharacterOutgoingDto {
 //    private String flaws;
 //    private String background;
 
-    public CharacterOutgoingDto(Long id, Long playerId, String characterName, String race, int speed, String abilityScore, int abilityBonus,
-                                String size, String weaponProficiencies, String proficiency, String languages, String traits, String charClass, int hitDice,
+    public CharacterOutgoingDto(Long id, Long playerId, String characterName, String race, int speed,
+                                String abilityScore, int abilityBonus,
+                                String size, String weaponProficiencies, String proficiency,
+                                String languages, String traits, String charClass, int hitDice,
                                 String classSkills, String classProficiencies, String savingThrows) {
         this.id = id;
         this.playerId = playerId;
