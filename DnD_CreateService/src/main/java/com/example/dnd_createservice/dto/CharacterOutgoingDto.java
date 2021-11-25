@@ -65,4 +65,32 @@ public class CharacterOutgoingDto {
 //    private String bonds;
 //    private String flaws;
 //    private String background;
+
+    public CharacterOutgoingDto(Long id, Long playerId, String characterName, String alignment, String race, int speed, String abilityScore, int abilityBonus,
+                                String size, String weaponProficiencies, String proficiency, String languages, String traits, String charClass, int hitDice,
+                                int hitPoints, String classSkills, String classProficiencies, String savingThrows) {
+        this.id = id;
+        this.playerId = playerId;
+        this.characterName = characterName;
+        this.alignment = alignment;
+        this.race = race;
+        this.speed = speed;
+        this.abilityScore = abilityScore;
+        this.abilityBonus = abilityBonus;
+        this.size = size;
+        this.weaponProficiencies = weaponProficiencies;
+        this.proficiency = proficiency;
+        this.languages = languages;
+        this.traits = traits;
+        this.charClass = charClass;
+        this.hitDice = hitDice;
+        this.hitPoints = hitPoints;
+        this.classSkills = classSkills;
+        this.classProficiencies = classProficiencies;
+        this.savingThrows = savingThrows;
+        this.level = 1;
+        this.experience = 0;
+        this.numberOfHitDice = 1;
+    }
+
 }
