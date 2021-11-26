@@ -58,7 +58,6 @@ public class CharacterDto {
     private int intelligenceModifier;
     private int wisdomModifier;
     private int charismaModifier;
-    private int armourClassModifier;
 
 //    Optional:
 //    private String ideals;

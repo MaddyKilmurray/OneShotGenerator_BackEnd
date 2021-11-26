@@ -19,7 +19,6 @@ import java.util.List;
 public class CharacterDao {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long playerId;
     private String characterName;
@@ -67,7 +66,6 @@ public class CharacterDao {
     private int intelligenceModifier;
     private int wisdomModifier;
     private int charismaModifier;
-    private int armourClassModifier;
 
 //    Optional:
 //    private String ideals;
