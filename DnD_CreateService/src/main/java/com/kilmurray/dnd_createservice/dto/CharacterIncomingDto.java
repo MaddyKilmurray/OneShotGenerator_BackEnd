@@ -32,6 +32,7 @@ public class CharacterIncomingDto {
     private String classSkills;
     private String classProficiencies;
     private String savingThrows;
+    private String spellCasting; //update DAO
 
 //    Optional:
 //    private String ideals;

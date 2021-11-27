@@ -51,6 +51,7 @@ public class CharacterDao {
     private String classSkills;
     private String classProficiencies;
     private String savingThrows;
+    private String spellCasting;
 
     // Player stats - Cannot be updated
     private int strength;
