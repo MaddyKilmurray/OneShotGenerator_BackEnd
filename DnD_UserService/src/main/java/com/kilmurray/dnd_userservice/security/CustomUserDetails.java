@@ -1,37 +1,37 @@
 package com.kilmurray.dnd_userservice.security;
 
-import com.kilmurray.dnd_userservice.dao.Roles;
 import com.kilmurray.dnd_userservice.dao.UserDao;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.List;
 
-@RequiredArgsConstructor
 public class CustomUserDetails implements UserDetails {
-    private final UserDao users;
+    private UserDao user;
+
+    public CustomUserDetails(UserDao user) {
+        this.user = user;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> authorities = new HashSet<>();
-        for (Roles roles : users.getRoles()) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + roles.getName()));
-        }
-        return authorities;
+
+        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(user.getRole());
+        return Arrays.asList(simpleGrantedAuthority);
     }
 
     @Override
     public String getPassword() {
-        return users.getPassword();
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return users.getUsername();
+        return user.getUsername();
     }
 
     @Override

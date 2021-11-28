@@ -5,6 +5,7 @@ import com.kilmurray.dnd_userservice.repository.UserRepository;
 import com.kilmurray.dnd_userservice.security.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,17 +14,21 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
-@Slf4j
 public class CustomUserDetailService implements UserDetailsService {
-    private final UserRepository userRepository;
 
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UserDao> storedUser = userRepository.findByUsername(username);
-        return storedUser.
-                map(CustomUserDetails::new).
-                orElseThrow(() -> new UsernameNotFoundException("User not found."));
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+
+        final UserDao user = this.userRepository.getByUsername(userName);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found !!");
+        } else {
+            return new CustomUserDetails(user);
+        }
+
     }
 }

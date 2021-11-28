@@ -37,7 +37,9 @@ public class UserService {
     }
 
     public UserDto create(UserDto userDto) {
+        System.out.println(userDto.getUsername());
         UserDao newUser = convertToDao(userDto);
+        System.out.println(newUser.getUsername());
         userRepository.save(newUser);
         Optional<UserDao> createdUser = userRepository.findByUsername(newUser.getUsername());
         return createdUser.map(this::convertToDto).orElse(null);
@@ -84,15 +86,17 @@ public class UserService {
     }
 
     public UserDao convertToDao(UserDto userDto) {
-        if (userDto.getIsDm()) {
+        System.out.println("Test 1");
+        System.out.println(userDto.isDm());
+        if (userDto.isDm()) {
             return new UserDao(userDto.getId(), userDto.getUsername(),
-                    userDto.getPassword(), userDto.getEmail(), userDto.getIsDm(),
-                    userDto.getPartyId(), new HashSet<Roles>(Arrays.asList(new Roles("DM"))));
+                    userDto.getPassword(), userDto.getEmail(), userDto.isDm(),
+                    userDto.getPartyId(), "DM");
         }
         else {
             return new UserDao(userDto.getId(), userDto.getUsername(),
-                    userDto.getPassword(), userDto.getEmail(), userDto.getIsDm(),
-                    userDto.getPartyId(), new HashSet<Roles>(Arrays.asList(new Roles("PLAYER"))));
+                    userDto.getPassword(), userDto.getEmail(), userDto.isDm(),
+                    userDto.getPartyId(), "PLAYER");
         }
     }
 
