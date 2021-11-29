@@ -19,6 +19,7 @@ import java.util.List;
 public class CharacterDao {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long playerId;
     private String characterName;
