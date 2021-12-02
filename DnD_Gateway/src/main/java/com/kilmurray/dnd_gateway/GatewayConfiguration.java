@@ -32,7 +32,11 @@ public class GatewayConfiguration {
                         .uri("lb://CREATE-SERVICE"))
                 .route(p -> p.path("/api/random/**")
                         .uri("lb://RANDOMISER-SERVICE"))
-                .route(p -> p.path("/api/user/**")
+                .route(p -> p.path("/api/users/validate/username")
+                        .uri("lb://USER-SERVICE"))
+                .route(p -> p.path("/api/users/validate/email")
+                        .uri("lb://USER-SERVICE"))
+                .route(p -> p.path("/api/users/**")
                         .filters(f -> f.filter(new AuthorisationHeadersFilter(environment).apply(new AuthorisationHeadersFilter.Config())))
                         .uri("lb://USER-SERVICE"))
                 .build();
