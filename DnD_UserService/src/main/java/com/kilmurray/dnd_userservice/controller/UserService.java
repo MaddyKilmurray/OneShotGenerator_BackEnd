@@ -4,19 +4,30 @@ import com.kilmurray.dnd_userservice.dao.Roles;
 import com.kilmurray.dnd_userservice.dao.UserDao;
 import com.kilmurray.dnd_userservice.dto.UserDto;
 import com.kilmurray.dnd_userservice.repository.UserRepository;
+import io.jsonwebtoken.Jwts;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
-    final UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder encoder;
+    private final Environment environment;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder encoder, Environment environment) {
         this.userRepository = userRepository;
+        this.encoder = encoder;
+        this.environment = environment;
     }
 
     public List<UserDto> getAll() {
@@ -37,16 +48,20 @@ public class UserService {
     }
 
     public UserDto create(UserDto userDto) {
-        System.out.println(userDto.getUsername());
         UserDao newUser = convertToDao(userDto);
-        System.out.println(newUser.getUsername());
         userRepository.save(newUser);
         Optional<UserDao> createdUser = userRepository.findByUsername(newUser.getUsername());
         return createdUser.map(this::convertToDto).orElse(null);
     }
 
-    public UserDto updateUser(String username, Optional<String> password, Optional<Boolean> isDm, Optional<Long> partyId) {
-        Optional<UserDao> updateUser = userRepository.findByEmail(username);
+    public UserDto updateUser(String token, Optional<String> password, Optional<Boolean> isDm, Optional<Long> partyId) {
+        token = token.replace("Bearer","");
+        String tokenSubject = Jwts.parser()
+                .setSigningKey(environment.getProperty("token.secret"))
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
+        Optional<UserDao> updateUser = userRepository.findByUsername(token);
         UserDao updatedUser = updateUser
                 .map(users -> updateUserDetails(password, isDm, partyId, users)) // update the user
                 .orElseThrow(() -> new RuntimeException("User not found."));
@@ -55,7 +70,7 @@ public class UserService {
 
     private UserDao updateUserDetails(Optional<String> password, Optional<Boolean> isDm, Optional<Long> partyId, UserDao updateUser) {
         if (password.isPresent()) {
-//            String newPassword = passwordEncoder.encode(password.get());
+            String newPassword = encoder.encode(password.get());
             updateUser.setPassword(password.get());
             userRepository.save(updateUser);
         }
@@ -86,8 +101,6 @@ public class UserService {
     }
 
     public UserDao convertToDao(UserDto userDto) {
-        System.out.println("Test 1");
-        System.out.println(userDto.isDm());
         if (userDto.isDm()) {
             return new UserDao(userDto.getId(), userDto.getUsername(),
                     userDto.getPassword(), userDto.getEmail(), userDto.isDm(),
@@ -100,11 +113,30 @@ public class UserService {
         }
     }
 
-    public UserDto getUserByUsername(String name) {
-        Optional<UserDao> foundUser = userRepository.findByUsername(name);
+    public UserDto getUserByUsername(String token) {
+        token = token.replace("Bearer","");
+        String tokenSubject = Jwts.parser()
+                .setSigningKey(environment.getProperty("token.secret"))
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
+        Optional<UserDao> foundUser = userRepository.findByUsername(tokenSubject);
         if (!foundUser.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"User cannot be found.");
         }
         return convertToDto(foundUser.get());
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<UserDao> foundUser = userRepository.findByUsername(username);
+        if (!foundUser.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"User cannot be found.");
+        }
+        else {
+            return new User(foundUser.get().getUsername(),foundUser.get().getPassword(),
+                    true,true,true,true,new ArrayList<>());
+        }
+
     }
 }

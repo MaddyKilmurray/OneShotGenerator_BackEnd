@@ -1,68 +1,51 @@
 package com.kilmurray.dnd_userservice.security;
 
-import com.kilmurray.dnd_userservice.security.filter.JwtAuthenticationFilter;
-import com.kilmurray.dnd_userservice.security.service.CustomUserDetailService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import com.kilmurray.dnd_userservice.controller.UserService;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private CustomUserDetailService customUserDetailService;
 
-    @Autowired
-    private JwtAuthenticationFilter jwtFilter;
+    private final UserService userService;
+    private final BCryptPasswordEncoder encoder;
+    private final Environment environment;
 
-//    @Autowired
-//    private JwtAuthenticationEntryPoint entryPoint;
+    public SecurityConfiguration(UserService userService, BCryptPasswordEncoder encoder, Environment environment) {
+        this.userService = userService;
+        this.encoder = encoder;
+        this.environment=environment;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable();
         http
-                .csrf()
-                .disable()
-                .cors()
-                .disable()
                 .authorizeRequests()
-                .antMatchers("/api/users/login").permitAll()
-                .antMatchers(HttpMethod.OPTIONS).permitAll()
-                .antMatchers("/api/users/").permitAll()
-                .antMatchers(HttpMethod.POST).permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/users")
+                .permitAll()
+                .antMatchers("/user_details")
+                .permitAll()
+                .antMatchers("/users/**")
+                .authenticated()
                 .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and();
-//                .exceptionHandling().authenticationEntryPoint(entryPoint);
-
-        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
+                .addFilter(getAuthenticationFilter());
     }
 
-    //over
+    private AuthenticationFilter getAuthenticationFilter() throws Exception {
+        AuthenticationFilter authenticationFilter = new AuthenticationFilter(userService,environment,authenticationManager());
+        authenticationFilter.setFilterProcessesUrl(environment.getProperty("login.url.path"));
+        return authenticationFilter;
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserDetailService);
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
+        auth.userDetailsService(userService).passwordEncoder(encoder);
     }
 }
