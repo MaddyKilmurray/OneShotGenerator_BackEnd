@@ -5,18 +5,16 @@ import com.kilmurray.dnd_userservice.dto.UserDto;
 import com.kilmurray.dnd_userservice.dto.UsernameDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(value = "*")
 @RestController
 @RequestMapping("/api/users")
-@Slf4j
 public class UserController {
 
     final
@@ -40,8 +38,8 @@ public class UserController {
 
     @GetMapping("/authenticated")
     @ResponseStatus(HttpStatus.OK)
-    public UserDto getUserById(Authentication authentication) {
-        return userService.getUserByUsername(authentication.getName());
+    public UserDto getUserByUsername(@RequestHeader (name="Authorization") String token) {
+        return userService.getUserByUsername(token);
     }
 
     @PostMapping
@@ -52,15 +50,15 @@ public class UserController {
 
     @PatchMapping("/authenticated/update")
     @ResponseStatus(HttpStatus.OK)
-    public UserDto updateUser(Authentication authentication, @RequestParam Optional<String> password, @RequestParam Optional<String> email,
+    public UserDto updateUser(@RequestHeader (name="Authorization") String token, @RequestParam Optional<String> password, @RequestParam Optional<String> email,
                               @RequestParam Optional<Boolean> isDm, @RequestParam Optional<Long> partyId) {
-        return userService.updateUser(authentication.getName(),password,isDm,partyId);
+        return userService.updateUser(token,password,isDm,partyId);
     }
 
     @PostMapping("/validate/username")
     @ResponseStatus(HttpStatus.OK)
     public boolean isValidUsername(@RequestBody UsernameDto usernameDto) {
-        return userService.validateUsernameExists(usernameDto.getEmail());
+        return userService.validateUsernameExists(usernameDto.getUsername());
     }
 
     @PostMapping("/validate/email")

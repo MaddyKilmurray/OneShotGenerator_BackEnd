@@ -19,6 +19,7 @@ import java.util.List;
 public class CharacterDao {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long playerId;
     private String characterName;
@@ -51,6 +52,7 @@ public class CharacterDao {
     private String classSkills;
     private String classProficiencies;
     private String savingThrows;
+    private String spellCasting;
 
     // Player stats - Cannot be updated
     private int strength;
