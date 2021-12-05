@@ -20,6 +20,8 @@ public class SecurityConfiguration {
         // @formatter:off
         http
                 .authorizeExchange()
+                .pathMatchers("/api/create/view").permitAll()
+                .pathMatchers("/api/create/save").hasAnyRole("ADMIN","DM","PLAYER")
                 .anyExchange().authenticated()
                 .and()
                 .oauth2Login()

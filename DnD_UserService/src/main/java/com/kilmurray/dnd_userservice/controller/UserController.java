@@ -42,7 +42,7 @@ public class UserController {
         return userService.getUserByUsername(token);
     }
 
-    @PostMapping
+    @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto createUser(@RequestBody UserDto userDto) {
         return userService.create(userDto);

@@ -17,6 +17,12 @@ public class SecurityConfiguration {
         // @formatter:off
         http
                 .authorizeExchange()
+                .pathMatchers("/api/users/register",
+                        "/api/users/validate/email",
+                        "/api/users/validate/username").permitAll()
+                .pathMatchers("/api/users/authenticated/update").hasAnyRole("ADMIN","DM","PLAYER")
+                .pathMatchers("/api/users/authenticated").hasAnyRole("ADMIN","DM","PLAYER")
+                .pathMatchers("/api/users/**").hasAnyRole("ADMIN","DM","PLAYER")
                 .anyExchange().authenticated()
                 .and()
                 .oauth2ResourceServer()
