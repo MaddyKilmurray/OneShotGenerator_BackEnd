@@ -1,6 +1,5 @@
 package com.kilmurray.dnd_userservice.controller;
 
-import com.kilmurray.dnd_userservice.dao.Roles;
 import com.kilmurray.dnd_userservice.dao.UserDao;
 import com.kilmurray.dnd_userservice.dto.UserDto;
 import com.kilmurray.dnd_userservice.repository.UserRepository;
@@ -11,7 +10,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -21,12 +19,10 @@ import java.util.*;
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder encoder;
     private final Environment environment;
 
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder encoder, Environment environment) {
+    public UserService(UserRepository userRepository,  Environment environment) {
         this.userRepository = userRepository;
-        this.encoder = encoder;
         this.environment = environment;
     }
 
@@ -70,7 +66,7 @@ public class UserService implements UserDetailsService {
 
     private UserDao updateUserDetails(Optional<String> password, Optional<Boolean> isDm, Optional<Long> partyId, UserDao updateUser) {
         if (password.isPresent()) {
-            String newPassword = encoder.encode(password.get());
+//            String newPassword = encoder.encode(password.get());
             updateUser.setPassword(password.get());
             userRepository.save(updateUser);
         }
