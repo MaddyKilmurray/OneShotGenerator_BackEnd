@@ -17,12 +17,12 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="DnD_CharacterService" target="1.8" />
+      <module name="DnD_CharacterService" target="11" />
       <module name="DnD_CreateService" target="1.8" />
-      <module name="DnD_DiscoveryService" target="1.8" />
+      <module name="DnD_DiscoveryService" target="11" />
       <module name="DnD_Gateway" target="1.8" />
-      <module name="Dnd_RandomiserService" target="1.8" />
-      <module name="DnD_ScenarioService" target="1.8" />
+      <module name="Dnd_RandomiserService" target="11" />
+      <module name="DnD_ScenarioService" target="11" />
       <module name="DnD_UserService" target="11" />
     </bytecodeTargetLevel>
   </component>
