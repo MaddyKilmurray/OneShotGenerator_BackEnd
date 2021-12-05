@@ -1,5 +1,6 @@
 package com.kilmurray.dnd_userservice.security;
 
+import com.okta.spring.boot.oauth.Okta;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
