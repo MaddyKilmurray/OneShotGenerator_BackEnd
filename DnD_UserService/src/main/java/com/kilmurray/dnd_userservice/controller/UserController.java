@@ -3,18 +3,9 @@ package com.kilmurray.dnd_userservice.controller;
 import com.kilmurray.dnd_userservice.dto.EmailDto;
 import com.kilmurray.dnd_userservice.dto.UserDto;
 import com.kilmurray.dnd_userservice.dto.UsernameDto;
-import com.kilmurray.dnd_userservice.security.models.JwtRequest;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.security.core.Authentication;
 
 import java.util.List;
 import java.util.Optional;
