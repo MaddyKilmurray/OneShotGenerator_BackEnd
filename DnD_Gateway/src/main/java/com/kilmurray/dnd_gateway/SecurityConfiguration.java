@@ -9,10 +9,6 @@ import org.springframework.core.env.Environment;
 @Configuration
 public class GatewayConfiguration {
 
-    private final String CHARACTER_SERVICE_NAME = "CHARACTER-SERVICE";
-    private final String USER_SERVICE_NAME = "USER-SERVICE";
-    private final String CREATE_SERVICE_NAME = "CREATE-SERVICE";
-    private final String RANDOMISER_SERVICE_NAME = "RANDOMISER-SERVICE";
     private final Environment environment;
 
     public GatewayConfiguration(Environment environment) {
@@ -32,6 +28,8 @@ public class GatewayConfiguration {
                         .uri("lb://CREATE-SERVICE"))
                 .route(p -> p.path("/api/random/**")
                         .uri("lb://RANDOMISER-SERVICE"))
+                .route(p -> p.path("/api/user/register")
+                        .uri("lb://USER-SERVICE"))
                 .route(p -> p.path("/api/user/**")
                         .filters(f -> f.filter(new AuthorisationHeadersFilter(environment).apply(new AuthorisationHeadersFilter.Config())))
                         .uri("lb://USER-SERVICE"))
