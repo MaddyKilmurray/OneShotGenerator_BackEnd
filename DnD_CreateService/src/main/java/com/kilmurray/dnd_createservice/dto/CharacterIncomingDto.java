@@ -14,6 +14,7 @@ public class CharacterIncomingDto {
     private Long id;
     private Long playerId;
     private String characterName;
+    private String partyId;
 
     // Race Bonuses - Cannot be updated
     private String race;

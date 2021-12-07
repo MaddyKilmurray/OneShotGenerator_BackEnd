@@ -14,6 +14,7 @@ public class CharacterOutgoingDto {
     private Long id;
     private Long playerId;
     private String characterName;
+    private String partyId;
     private int level;
     private int experience;
     private String alignment;

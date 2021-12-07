@@ -44,9 +44,9 @@ public class UserController {
 
     @PatchMapping("/authenticated/update")
     @ResponseStatus(HttpStatus.OK)
-    public UserDto updateUser(@RequestHeader (name="Authorization") String token, @RequestParam Optional<String> password, @RequestParam Optional<String> email,
+    public UserDto updateUser(@RequestHeader (name="Authorization") String token, @RequestParam Optional<String> email,
                               @RequestParam Optional<Boolean> isDm, @RequestParam Optional<Long> partyId) {
-        return userService.updateUser(token,password,isDm,partyId);
+        return userService.updateUser(token,isDm,partyId);
     }
 
     @PostMapping("/validate/username")

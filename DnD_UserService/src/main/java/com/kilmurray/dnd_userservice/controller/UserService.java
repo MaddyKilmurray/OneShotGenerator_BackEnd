@@ -16,7 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.*;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService {
 
     private final UserRepository userRepository;
     private final Environment environment;
@@ -50,7 +50,7 @@ public class UserService implements UserDetailsService {
         return createdUser.map(this::convertToDto).orElse(null);
     }
 
-    public UserDto updateUser(String token, Optional<String> password, Optional<Boolean> isDm, Optional<Long> partyId) {
+    public UserDto updateUser(String token, Optional<Boolean> isDm, Optional<Long> partyId) {
         token = token.replace("Bearer","");
         String tokenSubject = Jwts.parser()
                 .setSigningKey(environment.getProperty("token.secret"))
@@ -59,17 +59,12 @@ public class UserService implements UserDetailsService {
                 .getSubject();
         Optional<UserDao> updateUser = userRepository.findByUsername(token);
         UserDao updatedUser = updateUser
-                .map(users -> updateUserDetails(password, isDm, partyId, users)) // update the user
+                .map(users -> updateUserDetails(isDm, partyId, users)) // update the user
                 .orElseThrow(() -> new RuntimeException("User not found."));
         return convertToDto(updatedUser);
     }
 
-    private UserDao updateUserDetails(Optional<String> password, Optional<Boolean> isDm, Optional<Long> partyId, UserDao updateUser) {
-        if (password.isPresent()) {
-//            String newPassword = encoder.encode(password.get());
-            updateUser.setPassword(password.get());
-            userRepository.save(updateUser);
-        }
+    private UserDao updateUserDetails(Optional<Boolean> isDm, Optional<Long> partyId, UserDao updateUser) {
         if (isDm.isPresent()) {
             updateUser.setIsDm(isDm.get());
             userRepository.save(updateUser);
@@ -92,19 +87,19 @@ public class UserService implements UserDetailsService {
     }
 
     public UserDto convertToDto(UserDao userDao) {
-        return new UserDto(userDao.getId(), userDao.getUsername(), userDao.getPassword(),
+        return new UserDto(userDao.getId(), userDao.getUsername(),
                 userDao.getEmail(), userDao.getIsDm(),userDao.getPartyId());
     }
 
     public UserDao convertToDao(UserDto userDto) {
         if (userDto.isDm()) {
             return new UserDao(userDto.getId(), userDto.getUsername(),
-                    userDto.getPassword(), userDto.getEmail(), userDto.isDm(),
+                    userDto.getEmail(), userDto.isDm(),
                     userDto.getPartyId(), "DM");
         }
         else {
             return new UserDao(userDto.getId(), userDto.getUsername(),
-                    userDto.getPassword(), userDto.getEmail(), userDto.isDm(),
+                    userDto.getEmail(), userDto.isDm(),
                     userDto.getPartyId(), "PLAYER");
         }
     }
@@ -121,18 +116,5 @@ public class UserService implements UserDetailsService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"User cannot be found.");
         }
         return convertToDto(foundUser.get());
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UserDao> foundUser = userRepository.findByUsername(username);
-        if (!foundUser.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"User cannot be found.");
-        }
-        else {
-            return new User(foundUser.get().getUsername(),foundUser.get().getPassword(),
-                    true,true,true,true,new ArrayList<>());
-        }
-
     }
 }
