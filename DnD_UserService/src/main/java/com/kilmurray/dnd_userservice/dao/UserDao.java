@@ -31,7 +31,7 @@ public class UserDao {
 
     private String role;
 
-    public UserDao(String username, String email, Boolean isDm, Long partyId, List<LocalDate> availability) {
+    public UserDao(String username, String email, Boolean isDm, Long partyId) {
         this.username = username;
         this.email = email;
         this.isDm = isDm;

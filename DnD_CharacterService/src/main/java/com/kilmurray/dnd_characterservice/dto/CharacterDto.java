@@ -14,7 +14,7 @@ public class CharacterDto {
     private Long id;
     private Long playerId;
     private String characterName;
-    private String partyId;
+    private Long partyId;
     private int level;
     private int experience;
     private String alignment;

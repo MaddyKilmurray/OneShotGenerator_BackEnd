@@ -47,12 +47,12 @@ public class CharacterControllerTest {
     public void setUp() {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
-        testCharacter1 = new CharacterDao(1L,1L,"test character",1,0,"neutral good",
+        testCharacter1 = new CharacterDao(1L,1L,"test character",123456L,1,0,"neutral good",
                 "sword","shield","gloves","necklace",1,"dwarf",25,"con",2,"medium",
                 "proficiency","weapon proficiencies", "languages", "traits",
                 "paladin",12,50,"class skills","class proficiencies","saving throws","",
                 15,15,15,15,15,15,15,15,15,15,15,15,15);
-        testCharacter2 = new CharacterDao(2L,1L,"another test character",1,0,"neutral good",
+        testCharacter2 = new CharacterDao(2L,1L,"another test character",123456L,1,0,"neutral good",
                 "bow","shield","gloves","necklace",1,"dwarf",25,"con",2,"medium",
                 "proficiency","weapon proficiencies", "languages", "traits",
                 "paladin",12,50,"class skills","class proficiencies","saving throws","",
@@ -125,7 +125,7 @@ public class CharacterControllerTest {
     @Test
     @DisplayName("Test: POST new character. Success.")
     public void CharacterController_PostNewCharacter_Success() throws Exception {
-        newTestChar = new CharacterDto(3L,1L,"third test character",1,0,"neutral good",
+        newTestChar = new CharacterDto(3L,1L,"third test character",123456L,1,0,"neutral good",
                 "hammer","shield","gloves","necklace",1,"dwarf",25,"con",2,"medium",
                 "proficiency","weapon proficiencies", "languages", "traits",
                 "paladin",12,50,"class skills","class proficiencies","saving throws","",
