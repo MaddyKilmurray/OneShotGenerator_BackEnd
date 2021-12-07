@@ -24,7 +24,7 @@ public class DnDGatewayApplication {
                         .uri("lb://CREATE-SERVICE"))
                 .route("randomiser-service", p -> p.path("/api/random/**")
                         .uri("lb://RANDOMISER-SERVICE"))
-                .route("user-service", p -> p.path("/api/user/**")
+                .route("user-service", p -> p.path("/api/users/**")
                         .uri("lb://USER-SERVICE"))
                 .build();
     }

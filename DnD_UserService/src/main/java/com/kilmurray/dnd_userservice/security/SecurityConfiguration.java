@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.reactive.EnableWebFlux
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
+import static org.springframework.http.HttpMethod.GET;
+
 @EnableWebFluxSecurity
 @EnableReactiveMethodSecurity
 public class SecurityConfiguration {
@@ -19,9 +21,7 @@ public class SecurityConfiguration {
                 .pathMatchers("/api/users/register",
                         "/api/users/validate/email",
                         "/api/users/validate/username").permitAll()
-                .pathMatchers("/api/users/authenticated/update").hasAnyRole("ADMIN","DM","PLAYER")
-                .pathMatchers("/api/users/authenticated").hasAnyRole("ADMIN","DM","PLAYER")
-                .pathMatchers("/api/users/**").hasAnyRole("ADMIN","DM","PLAYER")
+                .pathMatchers(GET,"/api/users").hasAnyRole("ADMIN")
                 .anyExchange().authenticated()
                 .and()
                 .oauth2ResourceServer()
