@@ -30,10 +30,10 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @GetMapping("/authenticated")
+    @GetMapping("/{email}")
     @ResponseStatus(HttpStatus.OK)
-    public UserDto getUserByUsername(@RequestHeader (name="Authorization") String token) {
-        return userService.getUserByUsername(token);
+    public UserDto getUserByUsername(@PathVariable(name="email") String email) {
+        return userService.getUserByEmail(email);
     }
 
     @PostMapping("/register")
@@ -42,11 +42,11 @@ public class UserController {
         return userService.create(userDto);
     }
 
-    @PatchMapping("/authenticated/update")
+    @PatchMapping("/update/{email}")
     @ResponseStatus(HttpStatus.OK)
-    public UserDto updateUser(@RequestHeader (name="Authorization") String token, @RequestParam Optional<String> email,
+    public UserDto updateUser(@PathVariable(name = "email") String userEmail, @RequestParam Optional<String> email,
                               @RequestParam Optional<Boolean> isDm, @RequestParam Optional<Long> partyId) {
-        return userService.updateUser(token,isDm,partyId);
+        return userService.updateUser(userEmail,email,isDm,partyId);
     }
 
     @PostMapping("/validate/username")

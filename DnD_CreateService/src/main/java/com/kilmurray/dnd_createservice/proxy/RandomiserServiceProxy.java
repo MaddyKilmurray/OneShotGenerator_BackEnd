@@ -1,5 +1,6 @@
 package com.kilmurray.dnd_createservice.proxy;
 
+import com.kilmurray.dnd_createservice.dto.CharacterDetailDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,5 +50,7 @@ public interface RandomiserServiceProxy {
     @GetMapping("/api/random/statModifier/{stat}")
     public int getStatModifier(@PathVariable(name = "stat") int stat);
 
+    @GetMapping("/api/random/generateCharDetails")
+    public CharacterDetailDTO generateChar();
 
 }
