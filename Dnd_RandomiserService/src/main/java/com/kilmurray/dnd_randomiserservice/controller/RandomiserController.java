@@ -1,5 +1,6 @@
 package com.kilmurray.dnd_randomiserservice.controller;
 
+import com.kilmurray.dnd_randomiserservice.dto.CharacterDTO;
 import com.kilmurray.dnd_randomiserservice.service.RandomiserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -86,6 +87,11 @@ public class RandomiserController {
     @GetMapping("/statModifier/{stat}")
     public int getStatModifier(@PathVariable(name = "stat") int stat) {
         return randomiserService.getStatModifier(stat);
+    }
+
+    @GetMapping("/generateCharDetails")
+    public CharacterDTO generateChar() {
+        return randomiserService.generateDetails();
     }
 
 }

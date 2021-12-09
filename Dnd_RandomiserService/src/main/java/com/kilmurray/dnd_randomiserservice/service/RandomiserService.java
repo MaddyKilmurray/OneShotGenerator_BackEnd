@@ -1,6 +1,7 @@
 package com.kilmurray.dnd_randomiserservice.service;
 
 import com.kilmurray.dnd_randomiserservice.data.DataSet;
+import com.kilmurray.dnd_randomiserservice.dto.CharacterDTO;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -76,5 +77,22 @@ public class RandomiserService {
 
     public int getStatModifier(int stat) {
         return (stat - 10) /2;
+    }
+
+    public CharacterDTO generateDetails() {
+        CharacterDTO newCharacter = new CharacterDTO();
+        newCharacter.setAlignment(getRandomAlignment());
+        newCharacter.setStrength(statGenerator()); newCharacter.setStrengthModifier(getStatModifier(newCharacter.getStrength()));
+        newCharacter.setDexterity(statGenerator()); newCharacter.setDexterityModifier(getStatModifier(newCharacter.getDexterity()));
+        newCharacter.setConstitution(statGenerator()); newCharacter.setConstitutionModifier(getStatModifier(newCharacter.getConstitution()));
+        newCharacter.setIntelligence(statGenerator()); newCharacter.setIntelligenceModifier(getStatModifier(newCharacter.getIntelligence()));
+        newCharacter.setWisdom(statGenerator()); newCharacter.setWisdomModifier(getStatModifier(newCharacter.getWisdom()));
+        newCharacter.setCharisma(statGenerator()); newCharacter.setCharismaModifier(getStatModifier(newCharacter.getCharisma()));
+        newCharacter.setArmourClass(10 + newCharacter.getDexterityModifier());
+        newCharacter.setStartingWeapon(getRandomStarterWeapon());
+        newCharacter.setStartingArmour(getRandomStarterArmour());
+        newCharacter.setStartingGear(getRandomStarterGear());
+        newCharacter.setStartingTrinket(getRandomTrinket());
+        return newCharacter;
     }
 }
