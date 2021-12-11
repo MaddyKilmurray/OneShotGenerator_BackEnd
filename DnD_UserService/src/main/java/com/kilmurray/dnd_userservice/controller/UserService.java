@@ -1,7 +1,9 @@
 package com.kilmurray.dnd_userservice.controller;
 
 import com.kilmurray.dnd_userservice.dao.UserDao;
+import com.kilmurray.dnd_userservice.dto.CharacterDto;
 import com.kilmurray.dnd_userservice.dto.UserDto;
+import com.kilmurray.dnd_userservice.proxy.CharacterProxy;
 import com.kilmurray.dnd_userservice.repository.UserRepository;
 import io.jsonwebtoken.Jwts;
 import org.springframework.core.env.Environment;
@@ -15,11 +17,11 @@ import java.util.*;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final Environment environment;
+    private final CharacterProxy characterProxy;
 
-    public UserService(UserRepository userRepository,  Environment environment) {
+    public UserService(UserRepository userRepository, CharacterProxy characterProxy) {
         this.userRepository = userRepository;
-        this.environment = environment;
+        this.characterProxy = characterProxy;
     }
 
     public List<UserDto> getAll() {
@@ -115,5 +117,15 @@ public class UserService {
         foundUser.get().setIsDm(true);
         userRepository.save(foundUser.get());
         return convertToDto(foundUser.get());
+    }
+
+    public List<CharacterDto> getCharacters(String email) {
+        Optional<UserDao> foundUser = userRepository.findByEmail(email);
+        if (foundUser.isEmpty()) {
+            return null;
+        }
+
+        List<CharacterDto> characters = characterProxy.getByEmail(foundUser.get().getId());
+        return characters;
     }
 }

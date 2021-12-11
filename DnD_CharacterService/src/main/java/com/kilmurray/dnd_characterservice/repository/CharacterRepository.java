@@ -13,6 +13,4 @@ public interface CharacterRepository extends JpaRepository<CharacterDao, Long> {
     List<CharacterDao> findCharacterDaoByPlayerId(Long id);
 
     List<CharacterDao> findCharacterDaoByPartyId(Long partyID);
-
-    List<CharacterDao> findCharacterDaoByEmail(String email);
 }

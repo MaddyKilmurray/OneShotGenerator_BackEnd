@@ -1,5 +1,6 @@
 package com.kilmurray.dnd_userservice.controller;
 
+import com.kilmurray.dnd_userservice.dto.CharacterDto;
 import com.kilmurray.dnd_userservice.dto.EmailDto;
 import com.kilmurray.dnd_userservice.dto.UserDto;
 import com.kilmurray.dnd_userservice.dto.UsernameDto;
@@ -65,6 +66,12 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public boolean isValidEmail(@RequestBody EmailDto emailDto) {
         return userService.validateEmailExists(emailDto.getEmail());
+    }
+
+    @GetMapping("/characters/{email}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<CharacterDto> getCharacters(@PathVariable(name = "email") String email) {
+        return userService.getCharacters(email);
     }
 
 }
