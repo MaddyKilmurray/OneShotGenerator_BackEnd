@@ -46,20 +46,6 @@ public class UserService {
         return createdUser.map(this::convertToDto).orElse(null);
     }
 
-//    public UserDto updateUser(String token, Optional<Boolean> isDm, Optional<Long> partyId) {
-//        token = token.replace("Bearer","");
-//        String tokenSubject = Jwts.parser()
-//                .setSigningKey(environment.getProperty("token.secret"))
-//                .parseClaimsJws(token)
-//                .getBody()
-//                .getSubject();
-//        Optional<UserDao> updateUser = userRepository.findByUsername(token);
-//        UserDao updatedUser = updateUser
-//                .map(users -> updateUserDetails(isDm, partyId, users)) // update the user
-//                .orElseThrow(() -> new RuntimeException("User not found."));
-//        return convertToDto(updatedUser);
-//    }
-
     private UserDao updateUserDetails(Optional<String> email,Optional<Boolean> isDm, Optional<Long> partyId, UserDao updateUser) {
         if (email.isPresent()) {
             updateUser.setEmail(email.get());
@@ -104,20 +90,6 @@ public class UserService {
         }
     }
 
-//    public UserDto getUserByUsername(String token) {
-//        token = token.replace("Bearer","");
-//        String tokenSubject = Jwts.parser()
-//                .setSigningKey(environment.getProperty("token.secret"))
-//                .parseClaimsJws(token)
-//                .getBody()
-//                .getSubject();
-//        Optional<UserDao> foundUser = userRepository.findByUsername(tokenSubject);
-//        if (!foundUser.isPresent()) {
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"User cannot be found.");
-//        }
-//        return convertToDto(foundUser.get());
-//    }
-
     public UserDto getUserByEmail(String email) {
         Optional<UserDao> foundUser = userRepository.findByEmail(email);
         if (!foundUser.isPresent()) {
@@ -132,5 +104,16 @@ public class UserService {
                 .map(users -> updateUserDetails(email,isDm, partyId, users)) // update the user
                 .orElseThrow(() -> new RuntimeException("User not found."));
         return convertToDto(updatedUser);
+    }
+
+    public UserDto updateUserPartyId(String userEmail, Long partyId) {
+        Optional<UserDao> foundUser = userRepository.findByEmail(userEmail);
+        if (foundUser.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"User not found");
+        }
+        foundUser.get().setPartyId(partyId);
+        foundUser.get().setIsDm(true);
+        userRepository.save(foundUser.get());
+        return convertToDto(foundUser.get());
     }
 }

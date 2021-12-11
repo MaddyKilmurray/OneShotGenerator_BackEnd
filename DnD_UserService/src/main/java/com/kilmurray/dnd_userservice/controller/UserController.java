@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(value = "*")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -30,7 +30,7 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @GetMapping("/{email}")
+    @GetMapping("/by_email/{email}")
     @ResponseStatus(HttpStatus.OK)
     public UserDto getUserByUsername(@PathVariable(name="email") String email) {
         return userService.getUserByEmail(email);
@@ -47,6 +47,12 @@ public class UserController {
     public UserDto updateUser(@PathVariable(name = "email") String userEmail, @RequestParam Optional<String> email,
                               @RequestParam Optional<Boolean> isDm, @RequestParam Optional<Long> partyId) {
         return userService.updateUser(userEmail,email,isDm,partyId);
+    }
+
+    @PutMapping("/update/partyId/{email}")
+    @ResponseStatus(HttpStatus.OK)
+    public UserDto updatePartyId(@PathVariable(name = "email") String userEmail, @RequestBody Long partyId) {
+        return userService.updateUserPartyId(userEmail,partyId);
     }
 
     @PostMapping("/validate/username")

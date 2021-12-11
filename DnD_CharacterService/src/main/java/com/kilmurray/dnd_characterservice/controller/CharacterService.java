@@ -49,6 +49,15 @@ public class CharacterService {
         return allCharsDto;
     }
 
+    public List<CharacterDto> getByPartyId(Long partyID) {
+        List<CharacterDao> foundChars = characterRepository.findCharacterDaoByPartyId(partyID);
+        List<CharacterDto> allCharsDto = new ArrayList<>();
+        for (CharacterDao charDao : foundChars) {
+            allCharsDto.add(convertToDto(charDao));
+        }
+        return allCharsDto;
+    }
+
     public void createCharacter(CharacterDto characterDto) {
         CharacterDao newChar = convertToDao(characterDto);
         characterRepository.save(newChar);

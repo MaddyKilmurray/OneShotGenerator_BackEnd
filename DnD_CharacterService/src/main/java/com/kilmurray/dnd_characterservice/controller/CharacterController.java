@@ -31,13 +31,19 @@ public class CharacterController {
         return characterService.getByCharId(characterId);
     }
 
-    @GetMapping("/byPlayer/{playerId}")
+    @GetMapping("/byPlayer/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public List<CharacterDto> getByPlayerId(@PathVariable(name = "playerId") Long playerId) {
+    public List<CharacterDto> getByEmail(@PathVariable(name = "id") Long playerId) {
         return characterService.getByPlayerId(playerId);
     }
 
-    @PostMapping
+    @GetMapping("/byPartyId/{partyId}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<CharacterDto> getByPartyId(@PathVariable(name = "partyId") Long partyId) {
+        return characterService.getByPartyId(partyId);
+    }
+
+    @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public void createCharacter(@RequestBody CharacterDto characterDto) {
         characterService.createCharacter(characterDto);

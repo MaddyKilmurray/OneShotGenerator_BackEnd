@@ -23,7 +23,7 @@ public interface CharacterServiceProxy {
     @ResponseStatus(HttpStatus.OK)
     public List<CharacterOutgoingDto> getByPlayerId(@PathVariable(name = "playerId") Long playerId);
 
-    @PostMapping("/api/character")
+    @PostMapping("/api/character/create")
     @ResponseStatus(HttpStatus.CREATED)
     public void createCharacter(@RequestBody CharacterOutgoingDto characterDto);
 
