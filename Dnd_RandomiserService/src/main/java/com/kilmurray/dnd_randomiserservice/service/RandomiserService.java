@@ -2,6 +2,7 @@ package com.kilmurray.dnd_randomiserservice.service;
 
 import com.kilmurray.dnd_randomiserservice.data.DataSet;
 import com.kilmurray.dnd_randomiserservice.dto.CharacterDTO;
+import com.kilmurray.dnd_randomiserservice.dto.FactDTO;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -69,6 +70,15 @@ public class RandomiserService {
         Random generator = new Random();
         int randomIndex = generator.nextInt(dataSet.getAlignment().length);
         return dataSet.getAlignment()[randomIndex];
+    }
+
+    public FactDTO getRandomDragonFact() {
+        dataSet = new DataSet();
+        Random generator = new Random();
+        int randomIndex = generator.nextInt(dataSet.getDragonData().length);
+        FactDTO newFact = new FactDTO();
+        newFact.setFact(dataSet.getDragonData()[randomIndex]);
+        return newFact;
     }
 
     public int statGenerator() {

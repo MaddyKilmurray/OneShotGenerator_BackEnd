@@ -58,4 +58,10 @@ public class CharacterController {
                                         @RequestParam Optional<String> startingGear, @RequestParam Optional<String> startingTrinket) {
         return characterService.updateCharacter(charId,characterName,level,experience,alignment,startingWeapon, startingArmour, startingGear, startingTrinket);
     }
+
+    @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteCharacter(@PathVariable(name = "id") Long id) {
+        characterService.deleteCharacter(id);
+    }
 }

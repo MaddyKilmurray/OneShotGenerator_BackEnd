@@ -70,5 +70,20 @@ public class DataSet {
             "Lawful good","Neutral good","Chaotic good","Lawful neutral","Neutral","Chaotic neutral","Lawful evil","Neutral evil","Chaotic evil"
     };
 
+    private String[] dragonData = {
+            "The average adult Dragon produces a gallon of saliva every hour.",
+            "Ancient Fairy Dragons are rare, but they throw the best parties. Looking for lit parties in the Fey Wild is most effective means of tracking them.",
+            "A dragon can leap up to five times it's own body length in a single bound to assist with takeoff.",
+            "Certain breeds of bronze dragon can appear cross-eyed, because the nerves from the left side of the brain go to mostly the right eye and the nerves from the right side of the brain go mostly to the left eye.",
+            "Most dragons do not have the ability to taste sweetness, but they have an overdeveloped sense of taste for sickness or infection.",
+            "A dragon's memories are imbued into its very blood due to their magic",
+            "They love to eat fish, they hate eels, the food they gather isn't for them and grass is like catnip to them",
+            "The reason red dragons sleep on a pile of gold is because they have extremely warm bodies and that causes the gold to warm and become softer and actually make a bed for the dragon.",
+            "All dragons were omnivorous and could eat almost anything, thanks to their innate elemental nature that allowed them to consume and digest all sorts of food, including substances that wouldn't qualify as food to other living creatures",
+            "Most dragons usually consumed half their own weight in meat every day.",
+            "Dragons had excellent depth perception and comparably good peripheral vision, able to see twice as well as a human in daylight",
+            "Dragons were capable of blindsense, the sense in which eyes, ears, and other senses were used to detect invisible persons or objects"
+    };
+
 
 }

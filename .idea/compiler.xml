@@ -12,7 +12,6 @@
         <module name="DnD_CharacterService" />
         <module name="DnD_CreateService" />
         <module name="DnD_UserService" />
-        <module name="DnD_ScenarioService" />
         <module name="DnD_DiscoveryService" />
       </profile>
     </annotationProcessing>

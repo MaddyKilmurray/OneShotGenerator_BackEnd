@@ -63,6 +63,14 @@ public class CharacterService {
         characterRepository.save(newChar);
     }
 
+    public void deleteCharacter(Long id) {
+        Optional<CharacterDao> updateChar = characterRepository.findById(id);
+        if (!updateChar.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Character could not be found");
+        }
+        characterRepository.delete(updateChar.get());
+    }
+
     public CharacterDto updateCharacter(Long charId, Optional<String> characterName, Optional<Integer> level, Optional<Integer> experience,
                                         Optional<String> alignment, Optional<String> startingWeapon, Optional<String> startingArmour,
                                         Optional<String> startingGear, Optional<String> startingTrinket) {

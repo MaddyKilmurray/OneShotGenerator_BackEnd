@@ -1,6 +1,7 @@
 package com.kilmurray.dnd_randomiserservice.controller;
 
 import com.kilmurray.dnd_randomiserservice.dto.CharacterDTO;
+import com.kilmurray.dnd_randomiserservice.dto.FactDTO;
 import com.kilmurray.dnd_randomiserservice.service.RandomiserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -64,6 +65,12 @@ public class RandomiserController {
     @ResponseStatus(HttpStatus.OK)
     public String getRandomStarterArmour() {
         return randomiserService.getRandomStarterArmour();
+    }
+
+    @GetMapping("/dragon")
+    @ResponseStatus(HttpStatus.OK)
+    public FactDTO getRandomDragonFact() {
+        return randomiserService.getRandomDragonFact();
     }
 
     @GetMapping("/gear")
