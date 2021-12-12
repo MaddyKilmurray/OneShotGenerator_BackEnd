@@ -62,10 +62,4 @@ public class CharacterDto {
     private int intelligenceModifier;
     private int wisdomModifier;
     private int charismaModifier;
-
-//    Optional:
-//    private String ideals;
-//    private String bonds;
-//    private String flaws;
-//    private String background;
 }

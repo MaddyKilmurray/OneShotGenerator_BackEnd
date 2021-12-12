@@ -2,6 +2,9 @@ package com.kilmurray.dnd_characterservice.controller;
 
 import com.kilmurray.dnd_characterservice.dao.CharacterDao;
 import com.kilmurray.dnd_characterservice.dto.CharacterDto;
+import com.kilmurray.dnd_characterservice.dto.CharacterWithUserDTO;
+import com.kilmurray.dnd_characterservice.dto.UserDto;
+import com.kilmurray.dnd_characterservice.proxy.UserProxy;
 import com.kilmurray.dnd_characterservice.repository.CharacterRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,10 +20,12 @@ public class CharacterService {
 
     final CharacterRepository characterRepository;
     final ModelMapper modelMapper;
+    final UserProxy userProxy;
 
-    public CharacterService(CharacterRepository characterRepository, ModelMapper modelMapper) {
+    public CharacterService(CharacterRepository characterRepository, ModelMapper modelMapper, UserProxy userProxy) {
         this.characterRepository = characterRepository;
         this.modelMapper = modelMapper;
+        this.userProxy = userProxy;
     }
 
     public List<CharacterDto> getAll() {
@@ -119,6 +124,15 @@ public class CharacterService {
         return updateChar;
     }
 
+    public List<CharacterWithUserDTO> getCharactersByPartyIDWithUser(Long partyId) {
+        List<CharacterDao> foundCharacters = characterRepository.findCharacterDaoByPartyId(partyId);
+        List<CharacterWithUserDTO> charactersWithUser = new ArrayList<>();
+        for (CharacterDao characterDao : foundCharacters) {
+            CharacterWithUserDTO newChar = convertToUserDto(characterDao, characterDao.getPlayerId());
+            charactersWithUser.add(newChar);
+        }
+        return charactersWithUser;
+    }
 
     public CharacterDto convertToDto(CharacterDao characterDao) {
         CharacterDto characterDto = modelMapper.map(characterDao, CharacterDto.class);
@@ -129,5 +143,13 @@ public class CharacterService {
         CharacterDao characterDao = modelMapper.map(characterDto, CharacterDao.class);
         return characterDao;
     }
+
+    public CharacterWithUserDTO convertToUserDto(CharacterDao characterDao, Long id) {
+        CharacterWithUserDTO characterWithUserDTO = modelMapper.map(characterDao,CharacterWithUserDTO.class);
+        UserDto foundUser = userProxy.getUserById(id);
+        characterWithUserDTO.setPlayerUsername(foundUser.getUsername());
+        return characterWithUserDTO;
+    }
+
 
 }

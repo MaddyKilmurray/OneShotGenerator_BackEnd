@@ -1,32 +1,26 @@
-package com.kilmurray.dnd_characterservice.dao;
+package com.kilmurray.dnd_characterservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-import java.util.List;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class CharacterDao {
+public class CharacterWithUserDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long playerId;
+    private String playerUsername;
     private String characterName;
-    private long partyId;
+    private Long partyId;
     private int level;
     private int experience;
     private String alignment;
     private String startingWeapon;
     private String startingArmour;
-    @Column(name = "startingGear", columnDefinition = "longtext")
     private String startingGear;
     private String startingTrinket;
 
@@ -39,9 +33,7 @@ public class CharacterDao {
     private String abilityScore;
     private int abilityBonus;
     private String size;
-    @Column(name = "proficiency", columnDefinition = "longtext")
     private String proficiency;
-    @Column(name = "weaponProficiencies", columnDefinition = "longtext")
     private String weaponProficiencies;
     private String languages;
     private String traits;
@@ -69,4 +61,5 @@ public class CharacterDao {
     private int intelligenceModifier;
     private int wisdomModifier;
     private int charismaModifier;
+
 }

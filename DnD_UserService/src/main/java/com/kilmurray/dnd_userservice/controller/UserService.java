@@ -113,6 +113,10 @@ public class UserService {
         if (foundUser.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"User not found");
         }
+        List<UserDao> partyIdCheck = userRepository.findByPartyId(partyId);
+        if (partyIdCheck.size() != 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Party ID already exists");
+        }
         foundUser.get().setPartyId(partyId);
         foundUser.get().setIsDm(true);
         userRepository.save(foundUser.get());
