@@ -4,8 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/BackEnd.iml" filepath="$PROJECT_DIR$/.idea/BackEnd.iml" />
       <module fileurl="file://$PROJECT_DIR$/DnD_CharacterService/DnD_CharacterService.iml" filepath="$PROJECT_DIR$/DnD_CharacterService/DnD_CharacterService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DnD_CreateService/DnD_CreateService.iml" filepath="$PROJECT_DIR$/DnD_CreateService/DnD_CreateService.iml" />
       <module fileurl="file://$PROJECT_DIR$/DnD_DiscoveryService/DnD_DiscoveryService.iml" filepath="$PROJECT_DIR$/DnD_DiscoveryService/DnD_DiscoveryService.iml" />
-      <module fileurl="file://$PROJECT_DIR$/DnD_ScenarioService/DnD_ScenarioService.iml" filepath="$PROJECT_DIR$/DnD_ScenarioService/DnD_ScenarioService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DnD_Gateway/DnD_Gateway.iml" filepath="$PROJECT_DIR$/DnD_Gateway/DnD_Gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/DnD_UserService/DnD_UserService.iml" filepath="$PROJECT_DIR$/DnD_UserService/DnD_UserService.iml" />
       <module fileurl="file://$PROJECT_DIR$/Dnd_RandomiserService/Dnd_RandomiserService.iml" filepath="$PROJECT_DIR$/Dnd_RandomiserService/Dnd_RandomiserService.iml" />
     </modules>

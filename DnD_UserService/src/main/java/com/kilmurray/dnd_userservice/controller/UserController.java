@@ -1,24 +1,23 @@
 package com.kilmurray.dnd_userservice.controller;
 
+import com.kilmurray.dnd_userservice.dto.CharacterDto;
 import com.kilmurray.dnd_userservice.dto.EmailDto;
 import com.kilmurray.dnd_userservice.dto.UserDto;
 import com.kilmurray.dnd_userservice.dto.UsernameDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
 
-    final
-    UserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -32,27 +31,47 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @PostMapping
+    @GetMapping("/by_email/{email}")
+    @ResponseStatus(HttpStatus.OK)
+    public UserDto getUserByUsername(@PathVariable(name="email") String email) {
+        return userService.getUserByEmail(email);
+    }
+
+    @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto createUser(@RequestBody UserDto userDto) {
         return userService.create(userDto);
     }
 
-    @PatchMapping("/update/{id}")
+    @PatchMapping("/update/{email}")
     @ResponseStatus(HttpStatus.OK)
-    public UserDto updateUser(@PathVariable(name = "id") Long userId, @RequestParam Optional<String> password, @RequestParam Optional<String> email,
+    public UserDto updateUser(@PathVariable(name = "email") String userEmail, @RequestParam Optional<String> email,
                               @RequestParam Optional<Boolean> isDm, @RequestParam Optional<Long> partyId) {
-        return userService.updateUser(userId,password,isDm,partyId);
+        return userService.updateUser(userEmail,email,isDm,partyId);
+    }
+
+    @PutMapping("/update/partyId/{email}")
+    @ResponseStatus(HttpStatus.OK)
+    public UserDto updatePartyId(@PathVariable(name = "email") String userEmail, @RequestBody Long partyId) {
+        return userService.updateUserPartyId(userEmail,partyId);
     }
 
     @PostMapping("/validate/username")
+    @ResponseStatus(HttpStatus.OK)
     public boolean isValidUsername(@RequestBody UsernameDto usernameDto) {
-        return userService.validateUsernameExists(usernameDto.getEmail());
+        return userService.validateUsernameExists(usernameDto.getUsername());
     }
 
-    @PostMapping("/validate/password")
-    public boolean isValidPassword(@RequestBody EmailDto emailDto) {
+    @PostMapping("/validate/email")
+    @ResponseStatus(HttpStatus.OK)
+    public boolean isValidEmail(@RequestBody EmailDto emailDto) {
         return userService.validateEmailExists(emailDto.getEmail());
+    }
+
+    @GetMapping("/characters/{email}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<CharacterDto> getCharacters(@PathVariable(name = "email") String email) {
+        return userService.getCharacters(email);
     }
 
 }

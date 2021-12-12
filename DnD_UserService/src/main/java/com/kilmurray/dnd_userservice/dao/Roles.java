@@ -8,11 +8,11 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
 public class Roles {
 
     @Id
@@ -24,9 +24,7 @@ public class Roles {
     private String name;
 
 
-    // -------------------- Constructors --------------------
     public Roles(String name) {
         this.name = name;
     }
-
 }

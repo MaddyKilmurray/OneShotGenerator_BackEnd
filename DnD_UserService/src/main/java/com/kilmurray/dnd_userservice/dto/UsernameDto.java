@@ -12,5 +12,5 @@ import javax.persistence.SecondaryTable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UsernameDto {
-    public String email;
+    public String username;
 }

@@ -6,10 +6,11 @@
         <option value="$PROJECT_DIR$/DnD_DiscoveryService/pom.xml" />
         <option value="$PROJECT_DIR$/DnD_CharacterService/pom.xml" />
         <option value="$PROJECT_DIR$/Dnd_RandomiserService/pom.xml" />
-        <option value="$PROJECT_DIR$/DnD_ScenarioService/pom.xml" />
         <option value="$PROJECT_DIR$/DnD_UserService/pom.xml" />
+        <option value="$PROJECT_DIR$/DnD_CreateService/pom.xml" />
+        <option value="$PROJECT_DIR$/DnD_Gateway/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

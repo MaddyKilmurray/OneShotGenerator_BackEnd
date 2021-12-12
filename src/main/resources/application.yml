@@ -1,0 +1,5 @@
+okta:
+  oauth2:
+    client-secret: xDV-ohZ2FUnx_lV_DV7RjBPEHoHgk8aJQ1_4Iofk
+    client-id: 0oa2x9hyvcffMSxcY5d7
+    issuer: https://dev-5185830.okta.com/oauth2/default

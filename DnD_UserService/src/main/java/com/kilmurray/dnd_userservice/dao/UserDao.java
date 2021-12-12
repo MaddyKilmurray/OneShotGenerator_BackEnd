@@ -24,32 +24,30 @@ public class UserDao {
     private Long id;
 
     private String username;
-    private String password;
     private String email;
     private Boolean isDm;
     private Long partyId;
 //    private List<LocalDate> availability;
 
-    public UserDao(String username, String password, String email, Boolean isDm, Long partyId, List<LocalDate> availability) {
+    private String role;
+
+    public UserDao(String username, String email, Boolean isDm, Long partyId) {
         this.username = username;
-        this.password = password;
         this.email = email;
         this.isDm = isDm;
         this.partyId = partyId;
 //        this.availability = availability;
     }
 
-    public UserDao(String username, String password, String email, Long partyId) {
+    public UserDao(String username, String email, Long partyId) {
         this.username = username;
-        this.password = password;
         this.email = email;
         this.partyId = partyId;
         this.isDm = false;
     }
 
-    public UserDao(String username, String password, String email) {
+    public UserDao(String username, String email) {
         this.username = username;
-        this.password = password;
         this.email = email;
         this.isDm = false;
     }

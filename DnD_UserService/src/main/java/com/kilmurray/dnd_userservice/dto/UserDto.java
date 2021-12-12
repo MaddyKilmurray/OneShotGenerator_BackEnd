@@ -1,5 +1,6 @@
 package com.kilmurray.dnd_userservice.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,8 +14,8 @@ public class UserDto {
 
     private Long id;
     private String username;
-    private String password;
     private String email;
-    private Boolean isDm;
+    private boolean isDm;
     private Long partyId;
+
 }
