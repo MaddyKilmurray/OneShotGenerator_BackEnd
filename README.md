@@ -119,8 +119,8 @@ FLUSH PRIVILEGES;
     abilityScore: String,
     abilityBonus: int,
     size: String,
-    proficiency: String;
-    weaponProficiencies: String;
+    proficiency: String,
+    weaponProficiencies: String,
     languages: String,
     traits: String,
 
@@ -193,8 +193,8 @@ FLUSH PRIVILEGES;
     abilityScore: String,
     abilityBonus: int,
     size: String,
-    proficiency: String;
-    weaponProficiencies: String;
+    proficiency: String,
+    weaponProficiencies: String,
     languages: String,
     traits: String,
 
@@ -270,8 +270,8 @@ FLUSH PRIVILEGES;
     abilityScore: String,
     abilityBonus: int,
     size: String,
-    proficiency: String;
-    weaponProficiencies: String;
+    proficiency: String,
+    weaponProficiencies: String,
     languages: String,
     traits: String,
 
@@ -323,8 +323,8 @@ FLUSH PRIVILEGES;
     abilityScore: String,
     abilityBonus: int,
     size: String,
-    proficiency: String;
-    weaponProficiencies: String;
+    proficiency: String,
+    weaponProficiencies: String,
     languages: String,
     traits: String,
 
@@ -366,7 +366,7 @@ FLUSH PRIVILEGES;
 | localhost:8300/api/users/validate/email | POST | Validate if an email already exists in server | Email DTO | Boolean |
 | localhost:8300/api/users/characters/{email} | GET | Return a list of Characters by their email address | User Email | List<CharacterDTO> |
 
-#### <u>DTOs</u>
+#### DTOs
 
 #### User DTO
 
