@@ -82,8 +82,8 @@ FLUSH PRIVILEGES;
     abilityScore: String,
     abilityBonus: int,
     size: String,
-    proficiency: String;
-    weaponProficiencies: String;
+    proficiency: String,
+    weaponProficiencies: String,
     languages: String,
     traits: String,
 
@@ -143,7 +143,7 @@ FLUSH PRIVILEGES;
     dexterityModifier: int,
     constitutionModifier: int,
     intelligenceModifier: int,
-    wisdomModifier: int
+    wisdomModifier: int,
     charismaModifier: int
 }
 ```
@@ -218,7 +218,7 @@ FLUSH PRIVILEGES;
     dexterityModifier: int,
     constitutionModifier: int,
     intelligenceModifier: int,
-    wisdomModifier: int
+    wisdomModifier: int,
     charismaModifier: int
 }
 ```
@@ -295,7 +295,7 @@ FLUSH PRIVILEGES;
     dexterityModifier: int,
     constitutionModifier: int,
     intelligenceModifier: int,
-    wisdomModifier: int
+    wisdomModifier: int,
     charismaModifier: int
 }
 ```
@@ -347,7 +347,7 @@ FLUSH PRIVILEGES;
     dexterityModifier: int,
     constitutionModifier: int,
     intelligenceModifier: int,
-    wisdomModifier: int
+    wisdomModifier: int,
     charismaModifier: int
 }
 ```
