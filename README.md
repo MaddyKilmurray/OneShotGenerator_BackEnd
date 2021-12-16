@@ -12,7 +12,7 @@ Many people struggle to play due to the heavy time commitment. A campaign can la
 
 Designed to be a short version of a standard D&D campaign, a one shot is designed to be played in a few hours, an evening, or at most a day. Stories are short and easy to resolve, and creating a character is fun and quirky.
 
-#### Why Should You Use The D&D One-Shot Generator?
+#### Why Should You Use The D&D One-Shot Generator?
 
 Part of the magic of a one-shot is the amount of time saved. The last thing a user would want to do is spend longer creating a character than they would playing it!
 
